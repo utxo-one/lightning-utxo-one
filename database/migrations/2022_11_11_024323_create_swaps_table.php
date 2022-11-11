@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('r_hash')->nullable();
             $table->text('payment_request')->nullable();
             $table->text('address')->nullable();
-            $table->text('tx_id')->nullable();
+            $table->text('txid')->nullable();
             $table->timestamps();
             $table->timestamp('completed_at')->nullable();
         });

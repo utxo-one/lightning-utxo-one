@@ -48,13 +48,25 @@ class LightningService
     {
         $swap = Swap::where('uuid', $swapUuid)->firstOrFail();
 
+        if ($swap->status === 'completed') {
+            return $swap->txid;
+        }
+
         $invoice = $this->lnd->lookupInvoice(rHash: $swap->r_hash);
 
         if($invoice->isSettled()) {
-            return $this->sendCoins(
+            $txid = $this->sendCoins(
                 address: $swap->address,
                 amount: $swap->amount,
             )->getTxid();
+
+            $swap->update([
+                'status' => 'completed',
+                'txid' => $txid,
+                'completed_at' => now(),
+            ]);
+
+            return $txid;
         }
 
         return null;
