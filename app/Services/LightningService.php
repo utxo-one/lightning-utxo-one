@@ -25,11 +25,10 @@ class LightningService
 
     public function initLnToBtcSwap(int $amount, string $addr): Swap
     {
-        $fee = $amount * 0.01;
+        $fee = round($amount * 0.01);
 
         $invoice = $this->addInvoice(
             amount: $amount + $fee,
-            memo: $addr,
         );
 
         return Swap::create([

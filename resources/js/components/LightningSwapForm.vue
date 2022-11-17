@@ -44,14 +44,6 @@
                                 <img :src="'https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=' + response.payment_request"
                                     alt="qr code">
                                 <pre>{{ response.payment_request }}</pre>
-                                <pre>{{ response.uuid }}</pre>
-
-                                <!-- create a button to check invoice status -->
-                                <button
-                                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                                    @click="checkInvoiceStatus(response.uuid)">
-                                    Check Invoice Status
-                                </button>
 
                                 <!-- display the invoice status in a card -->
                                 <div class="card-body" v-if="txid">
